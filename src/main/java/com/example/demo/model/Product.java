@@ -28,19 +28,21 @@ public class Product
     
     private Date prodDate;
     private byte[] prodImage1;
+    private byte[] prodVideo;
     
     public Product()
     {
         
     }
 
-    public Product(String prodName, String prodDesc, String prodImage, Double prodPrice,Date prodDate,byte prodImage1) {
+    public Product(String prodName, String prodDesc, String prodImage, Double prodPrice,Date prodDate,byte prodImage1,byte prodVideo) {
         this.prodName = prodName;
         this.prodDesc = prodDesc;
         this.prodImage = prodImage;
         this.prodPrice = prodPrice;
         this.prodDate = prodDate;
         this.prodImage1 = this.prodImage1;
+        this.prodVideo = this.prodVideo;
     }
 
     public Long getId() {
@@ -99,10 +101,20 @@ public class Product
         this.prodImage1 = prodImage1;
     }
 
+    public byte[] getProdVideo() {
+        return prodVideo;
+    }
+
+    public void setProdVideo(byte[] prodVideo) {
+        this.prodVideo = prodVideo;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", prodName=" + prodName + ", prodDesc=" + prodDesc + ", prodImage=" + prodImage + ", prodPrice=" + prodPrice + ", prodDate=" + prodDate + ", prodImage1=" + Arrays.toString(prodImage1) + '}';
+        return "Product{" + "id=" + id + ", prodName=" + prodName + ", prodDesc=" + prodDesc + ", prodImage=" + prodImage + ", prodPrice=" + prodPrice + ", prodDate=" + prodDate + ", prodImage1=" + prodImage1 + ", prodVideo=" + prodVideo + '}';
     }
+
+   
     
     
     

@@ -42,7 +42,17 @@ public class ProductController
     {		
 	product = productService.getProductById(id);
 	response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-	response.getOutputStream().write(product.get().getProdImage1());
+        response.getOutputStream().write(product.get().getProdImage1());        
+	response.getOutputStream().close();
+    }
+    
+    @GetMapping("/product/video/{id}")
+    @ResponseBody
+    void showVideo(@PathVariable("id") Long id, HttpServletResponse response, Optional<Product> product) throws ServletException, IOException
+    {		
+	product = productService.getProductById(id);
+	response.setContentType("video/mp4,video/ogg");
+        response.getOutputStream().write(product.get().getProdVideo());        
 	response.getOutputStream().close();
     }
     
@@ -53,9 +63,10 @@ public class ProductController
     }
     
     @RequestMapping("/save")
-    public String save(@RequestParam String prodName,@RequestParam String prodDesc,@RequestParam Double prodPrice,@RequestParam String prodImage,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date prodDate,@RequestParam("prodImage1") MultipartFile file) throws IOException
+    public String save(@RequestParam String prodName,@RequestParam String prodDesc,@RequestParam Double prodPrice,@RequestParam String prodImage,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date prodDate,@RequestParam("prodImage1") MultipartFile file,@RequestParam("prodVideo") MultipartFile file1) throws IOException
     {
         byte[] imageData = file.getBytes();
+        byte[] videoData = file1.getBytes();
         Product product=new Product();
         product.setProdName(prodName);
         product.setProdDesc(prodDesc);
@@ -63,6 +74,7 @@ public class ProductController
         product.setProdImage(prodImage);
         product.setProdDate(prodDate);
         product.setProdImage1(imageData);
+        product.setProdVideo(videoData);
         productRepository.save(product);
         return "redirect:/show/"+product.getId();
     }

@@ -11,13 +11,13 @@
     </head>
     <body>
         <div layout:fragment="content" class="row">
-            <div class="col-xs-8 col-md-8"><br>
+            <div><br>
                 <h3>
                     <a href="/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Product</a>
                 </h3>
                 <h2>Product List</h2>
-                <div class="table-responsive">
-                    <table class="table" id="product-table">
+                <div>
+                    <table class="table table-hover table-striped" id="product-table">
                         <thead>
                             <tr>
                                 <th>Product Name</th>
@@ -26,6 +26,7 @@
                                 <th>Product Price</th>
                                 <th>Product Image</th>
                                 <th>Product Image blob</th>
+                                <th>Product Short Video</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,8 +35,9 @@
                                 <td th:text="${product.prodDesc}"></td>
                                 <td th:text="${#dates.format(product.prodDate,'dd-MM-yyyy')}"></td>
                                 <td th:text="${product.prodPrice}"></td>
-                                <td><img th:src="${product.prodImage}" width="100" height="100" onclick="onClick(this)" class="w3-hover-opacity" style="cursor:pointer"/></td>
-                                <td><img th:src="@{'/product/display/'+${product.id}}" width="100" height="100" onclick="onClick(this)" class="w3-hover-opacity" style="cursor:pointer"/></td>
+                                <td><img th:src="${product.prodImage}" width="200" height="150" onclick="onClick(this)" class="w3-hover-opacity" style="cursor:pointer"/></td>
+                                <td><img th:src="@{'/product/display/'+${product.id}}" width="150" height="150" onclick="onClick(this)" class="w3-hover-opacity" style="cursor:pointer"/></td>
+                                <td><video width="200" height="150" controls><source th:src="@{'/product/video/'+${product.id}}"></video></td>
                             </tr>
                         </tbody>
                     </table>
